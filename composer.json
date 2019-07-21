@@ -1,0 +1,23 @@
+{
+    "name": "jorge/example-ticket-php",
+    "description": "Example of ticket",
+    "type": "project",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Jorge Castro",
+            "email": "email@email.com"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "eftec\\exampleticket\\": ""
+        }
+    },    
+    "require": {
+        "eftec/bladeone": "^3.30",
+        "eftec/pdoone": "^1.7",
+        "eftec/routeone": "^1.2",
+        "eftec/validationone": "^1.14"
+    }
+}
