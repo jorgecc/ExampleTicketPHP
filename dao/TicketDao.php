@@ -22,6 +22,8 @@ class TicketDao
         try {
             $tickets = database()->select('*')
                 ->from('Tickets')
+                ->order('IdTicket desc')
+                ->limit('1,20')
                 ->toList();
         } catch (\Exception $e) {
             valid()->addMessage('ERRORINSERT','Unable to list. '.database()->lastError(),'error');

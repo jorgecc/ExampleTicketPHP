@@ -195,6 +195,63 @@ We call this method after we push the button (POST).
 
 * ListAction (is called for GET and POST) when we want to show the list
 
-## And finally, it is our code
+## How much minimalist is our code?
 
+* 32 PHP files (including libraries and examples).
+* 7000 lines of code (including lines of code of our libraries).
+* Our code (excluding libraries and views) are 166 lines of code. :-3
 
+![](http://images6.fanpop.com/image/answers/3032000/3032767_1349529235356.87res_500_281.jpg)
+
+## What is missing?
+
+* Since this project lacks users, then it misses cross-posting protection. 
+
+So, let's add csrf protection.
+
+It is our controller with csrf protection:
+
+```php
+    public static function IndexActionGet($id="",$idparent="",$event="") {
+        // ....
+        blade()->regenerateToken(); // we create a new csrf token
+    }
+    public static function IndexActionPost($id="",$idparent="",$event="") {
+        // .....
+        if (blade()->csrfIsValid()) { // we validated the token
+           // ....
+        } else {
+            valid()->addMessage('TOKEN','Token invalid','error');
+        }
+        // ....
+    }
+```
+
+and in our view
+
+```php
+<form class="border border-light p-5" method="post">
+    @csrf()
+   ....
+```
+
+* It also misses cache and pagination.  We won't add cache or pagination but we want to limit the number of tickets to show.
+
+It is part of the code without limit
+
+```php
+$tickets = database()->select('*')
+	->from('Tickets')
+	->toList(); // select * from tickets
+
+```
+
+It is part of the code with limit, so the system will never overflow.
+
+```php
+$tickets = database()->select('*')
+	->from('Tickets')
+	->order('IdTicket desc')
+	->limit('1,20')
+	->toList(); // select * from tickets order by idticket desc limit 1,20
+```

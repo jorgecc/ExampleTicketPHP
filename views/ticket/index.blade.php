@@ -14,6 +14,7 @@
 
 
 <form class="border border-light p-5" method="post">
+    @csrf()
 
     <div class="text-center">
         <p class="h4 mb-4">Add a new ticket</p>
