@@ -24,14 +24,6 @@ class TicketController
                     header('Location: ../../Ticket/List');
                     exit();
                 }
-            }
-        } else {
-            valid()->addMessage('TOKEN','Token invalid','error');
-        }
-        echo blade()->run('ticket.index',['ticket'=>$ticket]);
-    }
-    public static function ListAction($id="",$idparent="",$event="") {
-        $tickets=TicketDao::list();
-        echo blade()->run('ticket.list',['tickets'=>$tickets]);
+        echo blade()->run('ticket.list',['tickets'=>$ticket]);
     }
 }

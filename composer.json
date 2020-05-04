@@ -15,9 +15,11 @@
         }
     },    
     "require": {
-        "eftec/bladeone": "^3.30",
-        "eftec/pdoone": "^1.7",
-        "eftec/routeone": "^1.2",
-        "eftec/validationone": "^1.14"
+        "eftec/bladeone": "^3.43",
+        "eftec/pdoone": "^1.37",
+        "eftec/routeone": "^1.13",
+        "eftec/validationone": "^1.23.2",
+        "eftec/cacheone": "^1.4.2",
+        "ext-json": "*"
     }
 }

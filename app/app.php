@@ -1,6 +1,7 @@
 <?php
 
 use eftec\bladeone\BladeOne;
+use eftec\CacheOneRedis;
 use eftec\PdoOne;
 use eftec\routeone\RouteOne;
 use eftec\ValidationOne;
@@ -37,6 +38,8 @@ function database() {
 }
 
 
+
+
 try {
     // we try to create the schema. The user must have permission to create schema.
     database()->runRawQuery('CREATE SCHEMA `example`');
@@ -53,11 +56,21 @@ try {
         ],'IdTicket'
     );
 } catch (Exception $e) {
-    valid()->addMessage('CREATETABLE','Unable to create table tickets '.$database->lastError(),'info');
+    valid()->addMessage('CREATETABLE','Unable to create table tickets '.database()->lastError(),'info');
     // we try to create the schema. The user must have permission to create schema.
 }
 
+// cache
 
+function cache() {
+    global $cache;
+    if ($cache===null) {
+        $cache=new CacheOneRedis("127.0.0.1","example");
+    } else {
+        valid()->addMessage('REDIS','Unable to connect to Redis','info');
+    }
+    return $cache;
+}
 
 // view
 
