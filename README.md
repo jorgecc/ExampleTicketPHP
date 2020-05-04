@@ -57,21 +57,21 @@ A ticket system.
 
 ### Structure
 
-📜.htacess
-📜 router.php
-📜 composer.json (we use Composer)
-📁app
-.... 📜 app.php (our common code)
-📁controller
-.... 📜 TicketController.php
-📁 dao
-.... 📜 TicketDao.php
-📁 factory
-.... 📜 TicketFactory.php
-📁 views
-.... 📁 ticket
-.... .... 📜 index.blade.php
-.... .... 📜 list.blade.php
+📜.htacess        
+📜 router.php        
+📜 composer.json (we use Composer)   
+📁app   
+.... 📜 app.php (our common code)      
+📁controller      
+.... 📜 TicketController.php      
+📁 dao     
+.... 📜 TicketDao.php        
+📁 factory      
+.... 📜 TicketFactory.php      
+📁 views      
+.... 📁 ticket     
+.... .... 📜 index.blade.php      
+.... .... 📜 list.blade.php       
 
 
 First, we need some common code and find a way to use it across the whole code. For example, the database. The database must be a singleton (we won't want to create more than one connection per request), and we must configure it once.
