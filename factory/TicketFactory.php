@@ -2,10 +2,12 @@
 
 namespace eftec\exampleticket\factory;
 
+use eftec\exampleticket\repo\TicketsRepo;
+
 class TicketFactory
 {
     public static function Factory() {
-        return ['IdTicket'=>0,'User'=>'','Title'=>'','Description'=>''];
+        return TicketsRepo::factoryNull();
     }
     public static function Fetch() {
         $ticket=self::Factory(); // we star creating an empty ticket

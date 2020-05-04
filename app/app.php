@@ -23,7 +23,7 @@ function valid()  {
 // persistence
 
 // Our container.
-function database() {
+function pdoOne() {
     global $database;
     if ($database===null) {
         $database=new PdoOne('mysql','127.0.0.1','root','abc.123','example');
@@ -40,25 +40,6 @@ function database() {
 
 
 
-try {
-    // we try to create the schema. The user must have permission to create schema.
-    database()->runRawQuery('CREATE SCHEMA `example`');
-} catch (Exception $e) {
-    valid()->addMessage('CREATESCHEMA','Unable to create schema '.database()->lastError(),'info');
-}
-try {
-    database()->createTable('tickets'
-        ,[
-            'IdTicket'=>'INT NOT NULL AUTO_INCREMENT'
-            ,'User'=>'varchar(50) NOT NULL'
-            ,'Title'=>'varchar(50) NOT NULL'
-            ,'Description'=>'varchar(200) NOT NULL'
-        ],'IdTicket'
-    );
-} catch (Exception $e) {
-    valid()->addMessage('CREATETABLE','Unable to create table tickets '.database()->lastError(),'info');
-    // we try to create the schema. The user must have permission to create schema.
-}
 
 // cache
 

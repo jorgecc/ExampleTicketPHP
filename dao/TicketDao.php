@@ -2,11 +2,16 @@
 
 namespace eftec\exampleticket\dao;
 
+/**
+ * Class TicketDao
+ * @package eftec\exampleticket\dao
+ * @deprecated 
+ */
 class TicketDao
 {
     public static function insert($ticket) {
         try {
-            database()
+            pdoOne()
                 ->set('User=?', $ticket['User'])
                 ->set('Title=?', $ticket['Title'])
                 ->set('Description=?', $ticket['Description'])
@@ -17,7 +22,7 @@ class TicketDao
             }
             return true;
         } catch (\Exception $e) {
-            valid()->addMessage('ERRORINSERT','Unable to insert. '.database()->lastError(),'error');
+            valid()->addMessage('ERRORINSERT', 'Unable to insert. '.pdoOne()->lastError(), 'error');
         }
         return false;
     }
@@ -27,17 +32,17 @@ class TicketDao
                 $result=cache()->get('tickets','list',true);
                 if($result!==null) return json_decode($result,true);
             }
-            $tickets = database()->select('*')
-                ->from('Tickets')
-                ->order('IdTicket desc')
-                ->limit('1,20')
-                ->toList();
+            $tickets = pdoOne()->select('*')
+                               ->from('Tickets')
+                               ->order('IdTicket desc')
+                               ->limit('1,20')
+                               ->toList();
             if (cache()->enabled) {
                 cache()->set('tickets','list',$tickets,3600); // 3600 seconds
             }
             
         } catch (\Exception $e) {
-            valid()->addMessage('ERRORINSERT','Unable to list. '.database()->lastError(),'error');
+            valid()->addMessage('ERRORINSERT', 'Unable to list. '.pdoOne()->lastError(), 'error');
             $tickets=[];
         }
         return $tickets;

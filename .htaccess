@@ -4,7 +4,7 @@ RewriteCond %{REQUEST_URI} !-f
 RewriteCond %{REQUEST_URI} !-d
 RewriteCond %{REQUEST_URI} !-L
 # we exclude some folders
-RewriteRule ^(example|test|css|vendors|vendor|js|img|upload)($|/) - [L]
+RewriteRule ^(example|test|css|vendors|vendor|js|img|upload|genrepo.php)($|/) - [L]
 
 RewriteRule ^(.*)$ router.php?req=$1 [L,QSA]
 
