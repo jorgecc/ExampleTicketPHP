@@ -19,19 +19,17 @@
     <div class="text-center">
         <p class="h4 mb-4">Add a new ticket</p>
     </div>
-
-    <input type="text" name="User" class="form-control mb-4" placeholder="User" value="{{$ticket['User']}}">
+    @input(type="text" name="User" class="form-control mb-4" placeholder="User" value=$ticket['User'])
     @if(valid()->getMessageId('User')->countError())
         <div class="text-danger">{{valid()->getMessageId('User')->first()}}<br></div>
     @endif()
-    
-    <input type="text" name="Title" class="form-control mb-4" placeholder="Title" value="{{$ticket['Title']}}">
+
+    @input(type="text" name="Title" class="form-control mb-4" placeholder="Title" value=$ticket['Title'])
     @if(valid()->getMessageId('Title')->countError())
         <div class="text-danger">{{valid()->getMessageId('Title')->first()}}<br></div>
     @endif()
 
-
-    <textarea name="Description" class="form-control mb-4" placeholder="Textarea">{{$ticket['Description']}}</textarea>
+    @textarea(name="Description" class="form-control mb-4" placeholder="Textarea" value=$ticket['Description'])
     @if(valid()->getMessageId('Description')->countError())
         <div class="text-danger">{{valid()->getMessageId('Description')->first()}}<br></div>
     @endif()

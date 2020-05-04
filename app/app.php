@@ -1,6 +1,9 @@
-<?php
+<?php /** @noinspection PhpIllegalPsrClassPathInspection */
+
+/** @noinspection AutoloadingIssuesInspection */
 
 use eftec\bladeone\BladeOne;
+use eftec\bladeonehtml\BladeOneHtml;
 use eftec\CacheOneRedis;
 use eftec\PdoOne;
 use eftec\routeone\RouteOne;
@@ -55,13 +58,17 @@ function cache() {
 
 // view
 
+class myBlade extends  BladeOne {
+    use BladeOneHtml; // using the extension efec/BladeOneHtml
+}
+
 
 
 // our container. :-3 (it's a global function that is also a singleton
 function blade() {
     global $blade;
     if ($blade===null) {
-        $blade=new BladeOne();
+        $blade=new myBlade();
         $blade->setMode(BladeOne::MODE_DEBUG);
     }
     return $blade;

@@ -15,13 +15,10 @@ However, we won't want to reinvent the wheel.
 In our case, we will use the following libraries:
 
 * https://github.com/EFTEC/bladeone  It's a template library (for our VIEW). It's minimalist (one class and no dependency) yet complete.  Also, it uses the syntax of Laravel's Blade.
-
+* https://github.com/EFTEC/bladeonehtml  It is an extension to eftec/blade. It adds extra tags to the view, example @input() (for an input text)
 * https://github.com/EFTEC/pdpone. It's our persistence library (for the database). It's also minimalist; it's practically a wrapper over PDO (and it's fast).  We could use PDO too, but we don't want to reinvent the wheel.   
-
 * https://github.com/EFTEC/routeone. It's our router library. Again, it's minimalist.
-
 * https://github.com/EFTEC/routeone. It's our router library. Again, it's minimalist.
-
 * https://github.com/EFTEC/validationone. It's our library to fetch values and validates the information. It's also a container for errors.  Validation and error message works in tandem.  It's also minimalist (3 classes and nothing more).
 
 Also, we want a code that could grow, so it must be easy to maintenance (i.e. we don't want spaghetti code) but also we don't want an over-engineered code.
@@ -320,14 +317,23 @@ So the security and stability of the system are ensured.
 Since we are using the library BladeOne, then we could use views (instead of duct & taping the html+php inside the same class.
 In our case, we will use two views (for insert and list)
 * 📜 /views/ticket/index
-It is part of the view:
+It is part of the view: (without using eftec/BladeOneHtml)
 ```php
-    <input type="text" name="User" class="form-control mb-4" placeholder="User" value="\{\{$ticket['User']\}\}">
-    @ if(valid()->getMessageId('User')->countError())
-        <div class="text-danger">\{\{ valid()->getMessageId('User')->first()\}\}<br></div>
-    @endif()
+<input type="text" name="User" class="form-control mb-4" placeholder="User" value="{{$ticket['User']}}">
+@if(valid()->getMessageId('User')->countError())
+	<div class="text-danger">\{\{ valid()->getMessageId('User')->first()\}\}<br></div>
+@endif()
 
 ```
+And using the extension eftec/BladeOneHtml
+
+```php
+@input(type="text" name="User" class="form-control mb-4" placeholder="User" value=$ticket['User'])
+@if(valid()->getMessageId('User')->countError())
+    <div class="text-danger">{{valid()->getMessageId('User')->first()}}<br></div>
+@endif()
+```
+
 Here we are doing two operations: we are showing the $ticket (field User), and we are showing an error message (if any) using our global function called valid().   Each error is store into a container (in this case the container is called "User").  So it is possible to show more than one error at the same time (and this project does that).
 
 * 📜 /views/ticket/list

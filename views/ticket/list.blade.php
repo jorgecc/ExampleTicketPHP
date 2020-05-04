@@ -18,26 +18,21 @@
     <div class="text-center">
         <p class="h4 mb-4">List of tickets</p>
     </div>
-    
-    <table class="table">
-        <thead>
-        <tr>
-            <th>Id</th>
-            <th>User</th>
-            <th>Title</th>
-        </tr>
-        </thead>
-        <tbody>
-        @foreach($tickets as $ticket) 
-            <tr>
-                <td>{{$ticket['IdTicket']}}</td>
-                <td>{{$ticket['User']}}</td>
-                <td>{{$ticket['Title']}}</td>
-            </tr>
-        @endforeach 
-        </tbody>
-        
-    </table>
+    @table(class="table" values=$tickets alias=$ticket)
+        @tablehead
+            @cell(text="Id")
+            @cell(text="User")
+            @cell(text="Title")
+        @endtablehead
+        @tablebody(id='hello world'  )
+            @tablerows()
+                @cell(text=$ticket['IdTicket'])
+                @cell(text=$ticket['User'] )
+                @cell(text=$ticket['Title'])
+            @endtablerows
+        @endtablebody
+    @endtable
+   
 
     <a href="../Ticket/Index/" class="btn btn-info btn-block" type="submit">Add Ticket</a>
 
