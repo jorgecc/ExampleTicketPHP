@@ -24,7 +24,7 @@ class TicketController
             if (valid()->messageList->errorcount === 0) {
                 if (TicketsRepo::insert($ticket)) {
                     // ticket inserted correctly, let's go to the list
-                    header('Location: ../../Ticket/List');
+                    header('Location: ../Ticket/List');
                     exit();
                 }
                 echo blade()->run('ticket.list', ['tickets' => $ticket]);

@@ -16,7 +16,7 @@
     },    
     "require": {
         "eftec/bladeone": "^3.43",
-        "eftec/pdoone": "^1.37",
+        "eftec/pdoone": "^2.0",
         "eftec/routeone": "^1.13",
         "eftec/validationone": "^1.23.2",
         "eftec/cacheone": "^1.4.2",
